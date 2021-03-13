@@ -4,17 +4,17 @@ using namespace std;
 
 void fillArr(int arr[],int N);
 void showArr(int arr[], int N);
-void delOthermethod(int arr[], int N,int key);
+int delOthermethod(int arr[], int &N,int key);
 
 
 
 int main()
 {
 	setlocale(0, "Rus");
-    const int N=10;
-    int arr[N];
+    int N=10;
+    int* arr = new int[N];
     
-    cout << "массив: ";
+    cout << "Массив: ";
     fillArr(arr, N);
     showArr(arr, N);
     cout << endl;
@@ -25,14 +25,15 @@ int main()
 
     delOthermethod(arr, N, key);
 
-    cout << "массив: ";
+    cout << "Новый массив: ";
     showArr(arr,N);
-
+    delete[]arr;
 	return(0);
 }
 
-void delOthermethod(int arr[],int N, int key) {
+int delOthermethod(int arr[],int &N, int key) {
     int j = 1;
+    int c = 0;
     for (int i=1; i <= N; i++)
     {
         arr[j] = arr[i];
@@ -40,10 +41,11 @@ void delOthermethod(int arr[],int N, int key) {
             j++;
         }
         else {
-            break;
+            c++;
         }
     }
-      N = j;
+      N = N - c;
+      return N;
 }
 
 
